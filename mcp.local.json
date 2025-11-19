@@ -1,0 +1,21 @@
+{
+  "servers": {
+    "vercel/vercel-mcp-server": {
+      "type": "http",
+      "url": "https://api.vercel.com",
+      "gallery": "https://vercel.com/docs/rest-api",
+      "version": "1.0.0",
+      "env": {
+        "VERCEL_TOKEN": "${input:vercel_token}"
+      }
+    }
+  },
+  "inputs": [
+    {
+      "id": "vercel_token",
+      "type": "promptString",
+      "description": "Vercel Access Token (used by Vercel MCP server)",
+      "password": true
+    }
+  ]
+}
