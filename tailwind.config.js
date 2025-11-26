@@ -1,140 +1,127 @@
-const {
-  default: flattenColorPalette,
-} = require("tailwindcss/lib/util/flattenColorPalette");
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class"],
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
-  darkMode: "class",
   theme: {
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
+    },
     extend: {
       colors: {
-        background: 'rgb(var(--background) / <alpha-value>)',
-        foreground: 'rgb(var(--foreground) / <alpha-value>)',
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: 'rgb(var(--primary) / <alpha-value>)',
-          blue: 'var(--primary-blue)',
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
         },
-        muted: 'rgb(var(--muted) / <alpha-value>)',
-        border: 'rgb(var(--border) / <alpha-value>)',
-        'deep-navy': 'var(--deep-navy)',
-        'neutral-gray': 'var(--neutral-gray)',
-        'light-gray': 'var(--light-gray)',
-        'accent-orange': 'var(--accent-orange)',
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
       fontFamily: {
-        poppins: ['var(--font-poppins)'],
-        inter: ['var(--font-inter)'],
-      },
-      maxWidth: {
-        container: 'var(--container-max)',
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+        display: ['Space Grotesk', 'ui-sans-serif', 'system-ui'],
       },
       borderRadius: {
-        sm: 'var(--border-radius-sm)',
-        md: 'var(--border-radius-md)',
-        lg: 'var(--border-radius-lg)',
-      },
-      boxShadow: {
-        card: 'var(--card-shadow)',
-      },
-      animation: {
-        aurora: "aurora 60s linear infinite",
-        "gradient-shift": "gradientShift 8s ease infinite",
-        "blob": "blobAnimation 8s ease-in-out infinite",
-        "float": "float 6s ease-in-out infinite",
-        "scale-pulse": "scalePulse 2s ease-in-out infinite",
-        "smooth-fade-in": "smoothFadeIn 0.8s ease-out",
-        "slide-in-left": "slideInLeft 0.8s ease-out",
-        "slide-in-right": "slideInRight 0.8s ease-out",
-        "text-reveal": "textReveal 0.6s ease-out",
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
-        aurora: {
-          from: {
-            backgroundPosition: "50% 50%, 50% 50%",
-          },
-          to: {
-            backgroundPosition: "350% 50%, 350% 50%",
-          },
+        "accordion-down": {
+          from: { height: 0 },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
-        gradientShift: {
-          "0%": { backgroundPosition: "0% 50%" },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: 0 },
+        },
+        "gradient-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
-          "100%": { backgroundPosition: "0% 50%" },
         },
-        blobAnimation: {
-          "0%, 100%": { borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%" },
-          "50%": { borderRadius: "30% 60% 70% 40% / 40% 60% 30% 70%" },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
         },
-        float: {
-          "0%, 100%": { transform: "translateY(0px) translateX(0px)" },
-          "25%": { transform: "translateY(-10px) translateX(5px)" },
-          "50%": { transform: "translateY(-20px) translateX(0px)" },
-          "75%": { transform: "translateY(-10px) translateX(-5px)" },
+        "glow-pulse": {
+          "0%, 100%": { opacity: "1", filter: "brightness(1)" },
+          "50%": { opacity: "0.8", filter: "brightness(1.2)" },
         },
-        scalePulse: {
-          "0%, 100%": { transform: "scale(1)" },
-          "50%": { transform: "scale(1.05)" },
+        "shimmer": {
+          "0%": { backgroundPosition: "-1000px 0" },
+          "100%": { backgroundPosition: "1000px 0" },
         },
-        smoothFadeIn: {
+        "scale-in": {
+          "0%": { transform: "scale(0.8)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "slide-up": {
+          "0%": { transform: "translateY(30px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "slide-down": {
+          "0%": { transform: "translateY(-30px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        "fade-in": {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
-        slideInLeft: {
-          "from": {
-            opacity: "0",
-            transform: "translateX(-50px)",
-          },
-          "to": {
-            opacity: "1",
-            transform: "translateX(0)",
-          },
-        },
-        slideInRight: {
-          "from": {
-            opacity: "0",
-            transform: "translateX(50px)",
-          },
-          "to": {
-            opacity: "1",
-            transform: "translateX(0)",
-          },
-        },
-        textReveal: {
-          "0%": {
-            opacity: "0",
-            transform: "translateY(10px)",
-          },
-          "100%": {
-            opacity: "1",
-            transform: "translateY(0)",
-          },
-        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+        "gradient-shift": "gradient-shift 8s ease infinite",
+        "float": "float 6s ease-in-out infinite",
+        "glow-pulse": "glow-pulse 3s ease-in-out infinite",
+        "shimmer": "shimmer 3s linear infinite",
+        "scale-in": "scale-in 0.5s ease-out forwards",
+        "slide-up": "slide-up 0.6s ease-out forwards",
+        "slide-down": "slide-down 0.6s ease-out forwards",
+        "fade-in": "fade-in 0.5s ease-out forwards",
       },
       backgroundImage: {
-        "grid-small-slate-100":
-          "linear-gradient(to right, rgb(226 232 240 / 0.5) 1px, transparent 1px), linear-gradient(to bottom, rgb(226 232 240 / 0.5) 1px, transparent 1px)",
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      backgroundSize: {
-        "grid-small": "40px 40px",
+      backdropBlur: {
+        xs: '2px',
       },
     },
   },
-  plugins: [addVariablesForColors],
-};
-
-// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
-function addVariablesForColors({ addBase, theme }) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
-    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
-  );
-
-  addBase({
-    ":root": newVars,
-  });
+  plugins: [require("tailwindcss-animate")],
 }
