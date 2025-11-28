@@ -17,17 +17,74 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { KineticButton } from "@/components/ui/KineticButton";
 import { FuturisticBackground } from "@/components/ui/FuturisticBackground";
 import { TypewriterEffect } from "@/components/ui/typewriter-effect";
+import { supabaseBrowser } from "@/lib/supabase-browser";
 
 export function ContactFormSection() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+    const [file, setFile] = useState<File | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setFile(e.target.files[0]);
+        }
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setIsSubmitting(false);
-        setSubmitStatus("success");
+        setSubmitStatus("idle");
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            full_name: formData.get("name") as string,
+            company_name: formData.get("company") as string,
+            email: formData.get("email") as string,
+            phone: formData.get("phone") as string,
+            project_type: formData.get("project-type") as string,
+            budget_range: formData.get("budget") as string,
+            description: formData.get("description") as string,
+        };
+
+        try {
+            let fileUrl = null;
+
+            if (file) {
+                const fileExt = file.name.split(".").pop();
+                const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+                const filePath = `${fileName}`;
+
+                const { error: uploadError } = await supabaseBrowser.storage
+                    .from("project-files")
+                    .upload(filePath, file);
+
+                if (uploadError) throw uploadError;
+
+                const { data: publicUrlData } = supabaseBrowser.storage
+                    .from("project-files")
+                    .getPublicUrl(filePath);
+
+                fileUrl = publicUrlData.publicUrl;
+            }
+
+            const { error: insertError } = await supabaseBrowser
+                .from("consultation_requests")
+                .insert({
+                    ...data,
+                    file_url: fileUrl,
+                });
+
+            if (insertError) throw insertError;
+
+            setSubmitStatus("success");
+            setFile(null);
+            (e.target as HTMLFormElement).reset();
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            setSubmitStatus("error");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -101,6 +158,28 @@ export function ContactFormSection() {
                                         Send Another Message
                                     </motion.button>
                                 </motion.div>
+                            ) : submitStatus === "error" ? (
+                                <motion.div
+                                    initial={{ scale: 0.9, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    className="text-center py-12"
+                                >
+                                    <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-red-500/20 mb-6">
+                                        <CheckCircle2 className="h-10 w-10 text-red-500 rotate-45" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold mb-3 text-red-500">Something went wrong</h3>
+                                    <p className="text-foreground/70 mb-6">
+                                        Please try again later or contact us directly via email.
+                                    </p>
+                                    <motion.button
+                                        onClick={() => setSubmitStatus("idle")}
+                                        className="px-6 py-3 rounded-full glass border border-red-500/30 hover:border-red-500/60 transition-all duration-300"
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                    >
+                                        Try Again
+                                    </motion.button>
+                                </motion.div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -108,6 +187,7 @@ export function ContactFormSection() {
                                             <Label htmlFor="name" className="text-sm font-medium">Full Name</Label>
                                             <Input
                                                 id="name"
+                                                name="name"
                                                 placeholder="John Doe"
                                                 required
                                                 className="glass border-white/10 focus:border-primary/50 transition-colors"
@@ -117,6 +197,7 @@ export function ContactFormSection() {
                                             <Label htmlFor="company" className="text-sm font-medium">Company (Optional)</Label>
                                             <Input
                                                 id="company"
+                                                name="company"
                                                 placeholder="Your Company Ltd"
                                                 className="glass border-white/10 focus:border-primary/50 transition-colors"
                                             />
@@ -128,6 +209,7 @@ export function ContactFormSection() {
                                             <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
                                             <Input
                                                 id="email"
+                                                name="email"
                                                 type="email"
                                                 placeholder="john@example.com"
                                                 required
@@ -138,6 +220,7 @@ export function ContactFormSection() {
                                             <Label htmlFor="phone" className="text-sm font-medium">Phone Number</Label>
                                             <Input
                                                 id="phone"
+                                                name="phone"
                                                 type="tel"
                                                 placeholder="+234..."
                                                 required
@@ -149,7 +232,7 @@ export function ContactFormSection() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div className="space-y-2">
                                             <Label htmlFor="project-type" className="text-sm font-medium">Project Type</Label>
-                                            <Select>
+                                            <Select name="project-type">
                                                 <SelectTrigger className="glass border-white/10 focus:border-primary/50">
                                                     <SelectValue placeholder="Select type" />
                                                 </SelectTrigger>
@@ -165,7 +248,7 @@ export function ContactFormSection() {
                                         </div>
                                         <div className="space-y-2">
                                             <Label htmlFor="budget" className="text-sm font-medium">Budget Range</Label>
-                                            <Select>
+                                            <Select name="budget">
                                                 <SelectTrigger className="glass border-white/10 focus:border-primary/50">
                                                     <SelectValue placeholder="Select range" />
                                                 </SelectTrigger>
@@ -183,6 +266,7 @@ export function ContactFormSection() {
                                         <Label htmlFor="description" className="text-sm font-medium">Project Description</Label>
                                         <Textarea
                                             id="description"
+                                            name="description"
                                             placeholder="Please describe your project requirements..."
                                             className="min-h-[150px] glass border-white/10 focus:border-primary/50 transition-colors resize-none"
                                             required
@@ -191,10 +275,16 @@ export function ContactFormSection() {
 
                                     <div className="space-y-2">
                                         <Label className="text-sm font-medium">File Upload (Optional)</Label>
-                                        <div className="border-2 border-dashed border-white/10 rounded-lg p-8 flex flex-col items-center justify-center text-center hover:border-primary/30 transition-colors cursor-pointer glass">
+                                        <div className="border-2 border-dashed border-white/10 rounded-lg p-8 flex flex-col items-center justify-center text-center hover:border-primary/30 transition-colors cursor-pointer glass relative">
+                                            <input
+                                                type="file"
+                                                onChange={handleFileChange}
+                                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                            />
                                             <Upload className="h-10 w-10 text-primary mb-3" />
                                             <p className="text-sm text-foreground/70 mb-1">
-                                                Drag & drop files here, or click to select
+                                                {file ? file.name : "Drag & drop files here, or click to select"}
                                             </p>
                                             <p className="text-xs text-foreground/50">
                                                 PDF, DOCX, Images (Max 10MB)
