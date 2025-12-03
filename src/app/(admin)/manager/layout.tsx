@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { supabaseBrowser } from "@/lib/supabase-browser";
 import {
     LayoutDashboard,
     FileText,
@@ -14,18 +12,27 @@ import {
     LogOut,
 } from "lucide-react";
 
-{ name: "Dashboard", href: "/manager", icon: LayoutDashboard },
-{ name: "Consultation Requests", href: "/manager/consultations", icon: FileText },
-{ name: "Users", href: "/manager/users", icon: Users },
-{ name: "Settings", href: "/manager/settings", icon: Settings },
+const navItems = [
+    { name: "Dashboard", href: "/manager", icon: LayoutDashboard },
+    { name: "Consultation Requests", href: "/manager/consultations", icon: FileText },
+    { name: "Users", href: "/manager/users", icon: Users },
+    { name: "Settings", href: "/manager/settings", icon: Settings },
+];
 
 export default function AdminLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const pathname = usePathname();
+
+    const handleLogout = async () => {
+        await supabaseBrowser.auth.signOut();
+        router.push("/login");
+        router.refresh();
+    };
 
     return (
         <div className="min-h-screen bg-background">
@@ -83,7 +90,10 @@ export default function AdminLayout({
 
                     {/* Logout */}
                     <div className="p-4 border-t border-border">
-                        <button className="flex items-center gap-3 px-4 py-3 w-full rounded-lg hover:bg-muted transition-colors">
+                        <button
+                            onClick={handleLogout}
+                            className="flex items-center gap-3 px-4 py-3 w-full rounded-lg hover:bg-muted transition-colors"
+                        >
                             <LogOut className="h-5 w-5" />
                             <span>Logout</span>
                         </button>
