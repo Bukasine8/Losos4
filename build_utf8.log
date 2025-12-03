@@ -1,0 +1,188 @@
+﻿
+> losos-4@0.1.0 build
+> next build
+
+node.exe : [baseline-br
+owser-mapping] The 
+data in this module is 
+over two months old.  
+To ensure accurate 
+Baseline data, please 
+update: `npm i baseline
+-browser-mapping@latest
+ -D`
+At C:\Program Files\nod
+ejs\npm.ps1:29 char:3
++   & $NODE_EXE 
+$NPM_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: ([baseline-bro   
+ ws...ping@latest -    
+D`:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+   Γû▓ Next.js 16.0.3 (Turbopack)
+   - Environments: .env.local
+   - Experiments (use with caution):
+     ┬╖ optimizePackageImports
+
+ ΓÜá The "middleware" 
+file convention is 
+deprecated. Please use 
+"proxy" instead. Learn 
+more: https://nextjs.or
+g/docs/messages/middlew
+are-to-proxy
+   Creating an optimized production build ...
+[baseline-browser-mappi
+ng] The data in this 
+module is over two 
+months old.  To ensure 
+accurate Baseline 
+data, please update: 
+`npm i baseline-browser
+-mapping@latest -D`
+ Γ£ô Compiled successfully in 22.0s
+   Running TypeScript ...
+   Collecting page data using 3 workers ...
+[baseline-browser-mappi
+ng] The data in this 
+module is over two 
+months old.  To ensure 
+accurate Baseline 
+data, please update: 
+`npm i baseline-browser
+-mapping@latest -D`
+[baseline-browser-mappi
+ng] The data in this 
+module is over two 
+months old.  To ensure 
+accurate Baseline 
+data, please update: 
+`npm i baseline-browser
+-mapping@latest -D`
+[baseline-browser-mappi
+ng] The data in this 
+module is over two 
+months old.  To ensure 
+accurate Baseline 
+data, please update: 
+`npm i baseline-browser
+-mapping@latest -D`
+   Generating static pages using 3 workers (0/24) ...
+[baseline-browser-mappi
+ng] The data in this 
+module is over two 
+months old.  To ensure 
+accurate Baseline 
+data, please update: 
+`npm i baseline-browser
+-mapping@latest -D`
+   Generating static pages using 3 workers (6/24) 
+ Γ¿» useSearchParams() 
+should be wrapped in a 
+suspense boundary at 
+page "/book-meeting". 
+Read more: https://next
+js.org/docs/messages/mi
+ssing-suspense-with-csr
+-bailout
+    at S (C:\Users\Buka
+sine\Downloads\App_and_
+Web_development_project
+s\Web\Next JS\Losos4\.n
+ext\server\chunks\ssr\n
+ode_modules_next_153233
+50._.js:2:2111)
+    at p (C:\Users\Buka
+sine\Downloads\App_and_
+Web_development_project
+s\Web\Next JS\Losos4\.n
+ext\server\chunks\ssr\n
+ode_modules_next_153233
+50._.js:4:4847)
+    at bu (C:\Users\Buk
+asine\Downloads\App_and
+_Web_development_projec
+ts\Web\Next JS\Losos4\.
+next\server\chunks\ssr\
+src_app_(public)_book-m
+eeting_page_tsx_81a9cea
+5._.js:1:59334)
+    at ar (C:\Users\Buk
+asine\Downloads\App_and
+_Web_development_projec
+ts\Web\Next JS\Losos4\n
+ode_modules\next\dist\c
+ompiled\next-server\app
+-page-turbo.runtime.pro
+d.js:2:84366)
+    at aa (C:\Users\Buk
+asine\Downloads\App_and
+_Web_development_projec
+ts\Web\Next JS\Losos4\n
+ode_modules\next\dist\c
+ompiled\next-server\app
+-page-turbo.runtime.pro
+d.js:2:86185)
+    at as (C:\Users\Buk
+asine\Downloads\App_and
+_Web_development_projec
+ts\Web\Next JS\Losos4\n
+ode_modules\next\dist\c
+ompiled\next-server\app
+-page-turbo.runtime.pro
+d.js:2:107952)
+    at ao (C:\Users\Buk
+asine\Downloads\App_and
+_Web_development_projec
+ts\Web\Next JS\Losos4\n
+ode_modules\next\dist\c
+ompiled\next-server\app
+-page-turbo.runtime.pro
+d.js:2:105374)
+    at an (C:\Users\Buk
+asine\Downloads\App_and
+_Web_development_projec
+ts\Web\Next JS\Losos4\n
+ode_modules\next\dist\c
+ompiled\next-server\app
+-page-turbo.runtime.pro
+d.js:2:84718)
+    at aa (C:\Users\Buk
+asine\Downloads\App_and
+_Web_development_projec
+ts\Web\Next JS\Losos4\n
+ode_modules\next\dist\c
+ompiled\next-server\app
+-page-turbo.runtime.pro
+d.js:2:86234)
+    at aa (C:\Users\Buk
+asine\Downloads\App_and
+_Web_development_projec
+ts\Web\Next JS\Losos4\n
+ode_modules\next\dist\c
+ompiled\next-server\app
+-page-turbo.runtime.pro
+d.js:2:104714)
+Error occurred 
+prerendering page 
+"/book-meeting". Read 
+more: https://nextjs.or
+g/docs/messages/prerend
+er-error
+Export encountered an 
+error on /(public)/book
+-meeting/page: 
+/book-meeting, exiting 
+the build.
+ Γ¿» Next.js build 
+worker exited with 
+code: 1 and signal: 
+null

@@ -9,7 +9,9 @@ import { BookingConfirmation } from "@/components/booking/BookingConfirmation";
 
 type BookingStep = "type" | "datetime" | "info" | "confirmation";
 
-export default function BookMeetingPage() {
+import { Suspense } from "react";
+
+function BookMeetingContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [currentStep, setCurrentStep] = useState<BookingStep>("type");
@@ -49,8 +51,8 @@ export default function BookMeetingPage() {
                             <div key={label} className="flex-1 text-center">
                                 <div
                                     className={`w-8 h-8 rounded-full mx-auto mb-2 flex items-center justify-center text-sm font-bold ${idx + 1 <= getStepNumber(currentStep)
-                                            ? "bg-primary text-white"
-                                            : "bg-muted text-muted-foreground"
+                                        ? "bg-primary text-white"
+                                        : "bg-muted text-muted-foreground"
                                         }`}
                                 >
                                     {idx + 1}
@@ -98,4 +100,12 @@ function getStepNumber(step: BookingStep): number {
         confirmation: 4,
     };
     return steps[step];
+}
+
+export default function BookMeetingPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen pt-24 pb-12 text-center">Loading...</div>}>
+            <BookMeetingContent />
+        </Suspense>
+    );
 }
