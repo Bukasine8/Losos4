@@ -4,7 +4,6 @@ import { ValuePropsSection } from "@/components/home/ValuePropsSection";
 import { ServicesTeaserSection } from "@/components/home/ServicesTeaserSection";
 
 // Lazy load components below the fold
-const CertificationsSection = dynamic(() => import("@/components/home/CertificationsSection").then(mod => mod.CertificationsSection), { ssr: true });
 const ProjectsTeaserSection = dynamic(() => import("@/components/home/ProjectsTeaserSection").then(mod => mod.ProjectsTeaserSection), { ssr: true });
 const InfiniteTestimonials = dynamic(() => import("@/components/ui/InfiniteTestimonials").then(mod => mod.InfiniteTestimonials), { ssr: true });
 const CTASection = dynamic(() => import("@/components/home/CTASection").then(mod => mod.CTASection), { ssr: true });
@@ -15,7 +14,6 @@ export default function Home() {
             <HeroSection />
             <ValuePropsSection />
             <ServicesTeaserSection />
-            <CertificationsSection />
             <ProjectsTeaserSection />
             <section className="py-20 bg-muted/10">
                 <div className="container">

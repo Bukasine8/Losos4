@@ -1,70 +1,111 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Video, MapPin } from "lucide-react";
+import { Building2, Video, Check } from "lucide-react";
 import { GlassCard } from "@/components/ui/GlassCard";
+import { Button } from "@/components/ui/button";
 
 interface MeetingTypeSelectorProps {
     onSelect: (type: "physical" | "online") => void;
+    selected?: "physical" | "online" | null;
 }
 
-export function MeetingTypeSelector({ onSelect }: MeetingTypeSelectorProps) {
+export function MeetingTypeSelector({ onSelect, selected }: MeetingTypeSelectorProps) {
+    const meetingTypes = [
+        {
+            type: "physical" as const,
+            icon: Building2,
+            title: "Physical Meeting",
+            description: "Meet in person at our office or your preferred location for detailed discussions.",
+        },
+        {
+            type: "online" as const,
+            icon: Video,
+            title: "Online Meeting",
+            description: "Connect virtually via Google Meet, Zoom, or Microsoft Teams from anywhere.",
+        },
+    ];
+
     return (
-        <div className="space-y-6">
-            <div className="text-center">
-                <h1 className="text-4xl font-bold mb-4">Schedule a Meeting</h1>
+        <div className="space-y-8">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="text-center"
+            >
+                <h2 className="text-3xl font-bold mb-2">Choose Meeting Type</h2>
                 <p className="text-muted-foreground">
-                    Choose your preferred meeting type
+                    Select how you'd like to meet with our team
                 </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+                {meetingTypes.map((meeting, index) => {
+                    const Icon = meeting.icon;
+                    const isSelected = selected === meeting.type;
+
+                    return (
+                        <motion.div
+                            key={meeting.type}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1, duration: 0.4 }}
+                        >
+                            <GlassCard
+                                onClick={() => onSelect(meeting.type)}
+                                className={`p-8 cursor-pointer transition-all duration-300 hover:scale-[1.02] ${isSelected
+                                        ? "border-primary shadow-lg shadow-primary/20 bg-primary/5"
+                                        : "border-white/10 hover:border-primary/50"
+                                    }`}
+                            >
+                                <div className="flex flex-col items-center text-center space-y-4">
+                                    {/* Icon */}
+                                    <div
+                                        className={`p-4 rounded-full transition-colors ${isSelected ? "bg-primary/20" : "bg-muted"
+                                            }`}
+                                    >
+                                        <Icon
+                                            className={`h-10 w-10 ${isSelected ? "text-primary" : "text-muted-foreground"
+                                                }`}
+                                        />
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className="text-2xl font-bold">{meeting.title}</h3>
+
+                                    {/* Description */}
+                                    <p className="text-muted-foreground">{meeting.description}</p>
+
+                                    {/* Selection Indicator */}
+                                    {isSelected && (
+                                        <motion.div
+                                            initial={{ scale: 0 }}
+                                            animate={{ scale: 1 }}
+                                            className="flex items-center gap-2 text-primary font-medium"
+                                        >
+                                            <Check className="h-5 w-5" />
+                                            Selected
+                                        </motion.div>
+                                    )}
+                                </div>
+                            </GlassCard>
+                        </motion.div>
+                    );
+                })}
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mt-8">
+            {selected && (
                 <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex justify-center"
                 >
-                    <GlassCard
-                        className="p-8 cursor-pointer hover:border-primary/50 transition-all h-full"
-                        onClick={() => onSelect("physical")}
-                    >
-                        <div className="flex flex-col items-center text-center space-y-4">
-                            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                                <MapPin className="w-8 h-8 text-primary" />
-                            </div>
-                            <h3 className="text-2xl font-bold">Physical Meeting</h3>
-                            <p className="text-muted-foreground">
-                                Meet us at our office for an in-person consultation
-                            </p>
-                            <p className="text-sm text-primary font-medium">
-                                Losos4 Engineering Office, Lagos
-                            </p>
-                        </div>
-                    </GlassCard>
+                    <Button size="lg" onClick={() => onSelect(selected)}>
+                        Continue
+                    </Button>
                 </motion.div>
-
-                <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                >
-                    <GlassCard
-                        className="p-8 cursor-pointer hover:border-primary/50 transition-all h-full"
-                        onClick={() => onSelect("online")}
-                    >
-                        <div className="flex flex-col items-center text-center space-y-4">
-                            <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center">
-                                <Video className="w-8 h-8 text-secondary" />
-                            </div>
-                            <h3 className="text-2xl font-bold">Online Meeting</h3>
-                            <p className="text-muted-foreground">
-                                Connect with us via video call from anywhere
-                            </p>
-                            <p className="text-sm text-secondary font-medium">
-                                Google Meet Link Provided
-                            </p>
-                        </div>
-                    </GlassCard>
-                </motion.div>
-            </div>
+            )}
         </div>
     );
 }
