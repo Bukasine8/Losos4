@@ -115,7 +115,7 @@ export function HeroSection() {
                             size="lg"
                             onClick={() => router.push("/book-meeting")}
                         >
-                            Schedule a meeting
+                            Book a Consultation
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </KineticButton>
 
