@@ -48,30 +48,31 @@ function BookMeetingContent() {
         if (!meetingType || !personalInfo || !meetingDetails) return;
 
         try {
-            // Save to Supabase
-            const { error } = await supabaseBrowser.from("meetings").insert({
-                meeting_type: meetingType,
+            // Save to Supabase consultation_requests table
+            const { data, error } = await supabaseBrowser.from("consultation_requests").insert({
                 full_name: personalInfo.fullName,
                 email: personalInfo.email,
                 phone: personalInfo.phone,
                 company_name: personalInfo.companyName || null,
-                location: meetingType === "physical" ? meetingDetails.location : null,
-                address: meetingType === "physical" ? meetingDetails.address : null,
-                platform: meetingType === "online" ? meetingDetails.platform : null,
-                meeting_date: meetingDetails.date,
-                meeting_time: meetingDetails.time,
-                description: meetingDetails.description,
+                project_type: meetingType,
+                budget_range: null,
+                description: `${meetingType === "physical" ? "Physical Meeting" : "Online Meeting"}\n\nDate: ${meetingDetails.date}\nTime: ${meetingDetails.time}\n${meetingType === "physical" ? `Location: ${meetingDetails.location}\nAddress: ${meetingDetails.address || "N/A"}` : `Platform: ${meetingDetails.platform}`}\n\nProject Description:\n${meetingDetails.description}`,
+                file_url: null,
                 status: "pending",
-            });
+            }).select();
 
-            if (error) throw error;
+            if (error) {
+                console.error("Supabase error:", error);
+                throw error;
+            }
 
+            console.log("Booking saved successfully:", data);
             setCurrentStep("success");
             // Show calendar modal after a short delay
             setTimeout(() => setShowCalendarModal(true), 1500);
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error saving booking:", error);
-            setToastMessage("Failed to save booking. Please try again.");
+            setToastMessage(error?.message || "Failed to save booking. Please try again.");
             setShowToast(true);
         }
     };
