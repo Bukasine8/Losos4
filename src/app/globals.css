@@ -1,59 +1,57 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
     :root {
-        /* Futuristic Color Palette */
-        --background: 220 25% 6%;
-        --foreground: 210 40% 98%;
+        /* Dark Theme with Black Background */
+        --background: 0 0% 0%;
+        --foreground: 0 0% 98%;
 
-        --card: 220 20% 10%;
-        --card-foreground: 210 40% 98%;
+        --card: 0 0% 5%;
+        --card-foreground: 0 0% 98%;
 
-        --popover: 220 20% 10%;
-        --popover-foreground: 210 40% 98%;
+        --popover: 0 0% 5%;
+        --popover-foreground: 0 0% 98%;
 
-        /* Electric Blue Primary */
-        --primary: 210 100% 60%;
-        --primary-foreground: 210 40% 98%;
+        /* Professional Blue Primary */
+        --primary: 210 100% 50%;
+        --primary-foreground: 0 0% 100%;
 
-        /* Cyber Purple Secondary */
-        --secondary: 270 80% 65%;
-        --secondary-foreground: 210 40% 98%;
+        /* Professional Purple Secondary */
+        --secondary: 270 60% 50%;
+        --secondary-foreground: 0 0% 100%;
 
-        --muted: 220 20% 15%;
-        --muted-foreground: 215 20% 65%;
+        --muted: 0 0% 10%;
+        --muted-foreground: 0 0% 65%;
 
-        /* Neon Pink Accent */
-        --accent: 330 100% 70%;
-        --accent-foreground: 210 40% 98%;
+        /* Professional Accent */
+        --accent: 210 100% 50%;
+        --accent-foreground: 0 0% 100%;
 
         --destructive: 0 84% 60%;
-        --destructive-foreground: 210 40% 98%;
+        --destructive-foreground: 0 0% 100%;
 
-        --border: 220 20% 20%;
-        --input: 220 20% 15%;
-        --ring: 210 100% 60%;
+        --border: 0 0% 15%;
+        --input: 0 0% 10%;
+        --ring: 210 100% 50%;
 
         --radius: 1rem;
 
-        /* Glassmorphism */
-        --glass-bg: rgba(255, 255, 255, 0.05);
+        /* Glassmorphism for Dark Theme */
+        --glass-bg: rgba(0, 0, 0, 0.6);
         --glass-border: rgba(255, 255, 255, 0.1);
         --glass-blur: 20px;
 
         /* Gradients */
-        --gradient-primary: linear-gradient(135deg, hsl(210, 100%, 60%) 0%, hsl(270, 80%, 65%) 100%);
-        --gradient-accent: linear-gradient(135deg, hsl(330, 100%, 70%) 0%, hsl(25, 100%, 60%) 100%);
-        --gradient-cyber: linear-gradient(135deg, hsl(180, 100%, 50%) 0%, hsl(270, 100%, 60%) 50%, hsl(330, 100%, 70%) 100%);
+        --gradient-primary: linear-gradient(135deg, hsl(210, 100%, 50%) 0%, hsl(270, 60%, 50%) 100%);
+        --gradient-accent: linear-gradient(135deg, hsl(210, 100%, 50%) 0%, hsl(200, 100%, 50%) 100%);
+        --gradient-cyber: linear-gradient(135deg, hsl(180, 100%, 40%) 0%, hsl(270, 60%, 50%) 50%, hsl(210, 100%, 50%) 100%);
 
         /* Shadows & Glows */
-        --glow-primary: 0 0 20px hsla(210, 100%, 60%, 0.5);
-        --glow-accent: 0 0 20px hsla(330, 100%, 70%, 0.5);
-        --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.5);
+        --glow-primary: 0 0 20px hsla(210, 100%, 50%, 0.3);
+        --glow-accent: 0 0 20px hsla(210, 100%, 50%, 0.3);
+        --shadow-elevated: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
     .dark {
@@ -86,7 +84,7 @@
 
     body {
         @apply bg-background text-foreground;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family: var(--font-open-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         scroll-behavior: smooth;
     }
 
@@ -96,8 +94,25 @@
     h4,
     h5,
     h6 {
-        font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         font-weight: 700;
+    }
+
+    /* Section reveal animations */
+    section {
+        animation: section-fade-in 0.8s ease-out;
+    }
+
+    @keyframes section-fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     /* Custom Scrollbar */
@@ -130,10 +145,10 @@
     }
 
     .glass-strong {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(30px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* Gradient Text */
