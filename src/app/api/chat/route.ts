@@ -46,5 +46,5 @@ You are the AI Assistant for Losos4 Consultants Ltd., a premier multidisciplinar
         messages,
     });
 
-    return result.toDataStreamResponse();
+    return result.toTextStreamResponse();
 }

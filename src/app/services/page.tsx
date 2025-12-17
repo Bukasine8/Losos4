@@ -65,7 +65,7 @@ export default function ServicesPage() {
                     </div>
                     <div className="order-1 lg:order-2 h-[400px] rounded-lg relative overflow-hidden group shadow-xl">
                         <Image
-                            src="/images/Project_Images/PPPRA HQ Building, Abuja..jpeg"
+                            src="/images/Project_Images/Project management.jpeg"
                             alt="Project Management - PPPRA HQ"
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -80,7 +80,7 @@ export default function ServicesPage() {
                 <div className="container grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div className="order-1 h-[400px] rounded-lg relative overflow-hidden group shadow-xl border-4 border-white/10">
                         <Image
-                            src="/images/Project_Images/1X1250kVA and 385kVA Genset Installation at PPPRA HQ Building, Abuja.jpeg"
+                            src="/images/Project_Images/Mechanical.jpeg"
                             alt="Mechanical Engineering - Genset Installation"
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -149,7 +149,7 @@ export default function ServicesPage() {
                     </div>
                     <div className="order-1 lg:order-2 h-[400px] rounded-lg relative overflow-hidden group shadow-xl">
                         <Image
-                            src="/images/Project_Images/Power and Distribution Installation at PPRA HQ Building, Abuja.jpeg"
+                            src="/images/Project_Images/Electrical Installations.jpeg"
                             alt="Electrical Engineering - Power Distribution"
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -164,7 +164,7 @@ export default function ServicesPage() {
                 <div className="container grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                     <div className="order-1 h-[400px] rounded-lg relative overflow-hidden group shadow-xl border border-white/10">
                         <Image
-                            src="/images/Project_Images/page_164_img_3.jpeg"
+                            src="/images/Project_Images/fire_management.jpeg"
                             alt="Fire Engineering Systems"
                             fill
                             className="object-cover transition-transform duration-700 group-hover:scale-105"
