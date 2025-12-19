@@ -3,8 +3,9 @@ import { Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { WhatsAppBubble } from "@/components/ui/WhatsAppBubble";
+import { ContactFAB } from "@/components/ui/ContactFAB";
 import { Chatbot } from "@/components/ui/Chatbot";
+import { BottomNav } from "@/components/layout/BottomNav";
 
 const inter = Inter({
     variable: "--font-inter",
@@ -41,8 +42,9 @@ export default function RootLayout({
                     {children}
                 </main>
                 <Footer />
-                <WhatsAppBubble />
+                <ContactFAB />
                 <Chatbot />
+                <BottomNav />
             </body>
         </html>
     );

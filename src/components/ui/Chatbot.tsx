@@ -13,7 +13,13 @@ export function Chatbot() {
     // Cast to any to avoid TS errors with potentially mismatched types in the SDK
     // but trusting the runtime values are present
     const chatHelpers = useChat() as any;
-    const { messages = [], input = "", handleInputChange, handleSubmit, isLoading } = chatHelpers || {};
+    const {
+        messages = [],
+        input = "",
+        handleInputChange = () => { },
+        handleSubmit = (e: React.FormEvent) => e.preventDefault(),
+        isLoading = false
+    } = chatHelpers || {};
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -31,7 +37,7 @@ export function Chatbot() {
             <button
                 onClick={() => setIsOpen(!isOpen)}
                 className={cn(
-                    "fixed bottom-24 right-6 z-[120] flex items-center justify-center transition-all duration-300",
+                    "fixed bottom-36 md:bottom-24 right-6 z-40 flex items-center justify-center transition-all duration-300",
                     "w-14 h-14 md:w-16 md:h-16 rounded-full bg-losos-blue text-white shadow-lg",
                     "hover:scale-110 active:scale-95 border-2 border-white",
                     "animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500",
@@ -58,7 +64,7 @@ export function Chatbot() {
             {/* Chat Window */}
             <div
                 className={cn(
-                    "fixed bottom-44 right-6 z-[110] flex flex-col transition-all duration-500 origin-bottom-right",
+                    "fixed bottom-20 md:bottom-44 right-6 z-39 flex flex-col transition-all duration-500 origin-bottom-right",
                     "w-[90vw] md:w-[400px] h-[500px] max-h-[60vh] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden",
                     isOpen ? "scale-100 opacity-100 translate-y-0" : "scale-50 opacity-0 translate-y-20 pointer-events-none"
                 )}

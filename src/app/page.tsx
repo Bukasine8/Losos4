@@ -42,7 +42,7 @@ export default function Home() {
                 </div>
 
                 <div className="container relative z-10 text-center px-4">
-                    <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 md:mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                    <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 md:mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                         Precision Engineering <br className="hidden md:block" /> for Critical Infrastructure.
                     </h1>
                     <p className="text-lg md:text-2xl text-gray-300 max-w-2xl mx-auto mb-10 md:mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">

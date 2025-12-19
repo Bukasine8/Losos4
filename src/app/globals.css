@@ -27,3 +27,30 @@
     font-weight: 700;
   }
 }
+
+/* Touch and interactive element optimization for mobile */
+@layer utilities {
+  .touch-highlight {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Ensure minimum touch target size (48x48px recommended) */
+  @screen max-md {
+    button, [role="button"], a {
+      min-height: 3rem;
+      min-width: 3rem;
+    }
+  }
+
+  /* Smooth scrolling for drawer */
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Main content spacing for mobile bottom nav */
+  @screen max-md {
+    main {
+      padding-bottom: 5rem;
+    }
+  }
+}
