@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import { MobileDrawer } from "./MobileDrawer";
+import { motion } from "framer-motion";
 
 const navItems = [
     { name: "Home", href: "/" },
@@ -55,16 +56,17 @@ export function Header() {
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex items-center gap-8">
                     {navItems.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className={cn(
-                                "text-sm font-medium uppercase tracking-widest hover:text-losos-blue transition-colors",
-                                pathname === item.href ? "text-losos-blue" : "text-gray-300"
-                            )}
-                        >
-                            {item.name}
-                        </Link>
+                        <motion.div key={item.name} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                            <Link
+                                href={item.href}
+                                className={cn(
+                                    "text-sm font-medium uppercase tracking-widest hover:text-losos-blue transition-colors",
+                                    pathname === item.href ? "text-losos-blue" : "text-gray-300"
+                                )}
+                            >
+                                {item.name}
+                            </Link>
+                        </motion.div>
                     ))}
                     <Button variant="primary" size="sm" asChild>
                         <Link href="/schedule">Schedule a Meeting</Link>

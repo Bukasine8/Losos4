@@ -9,6 +9,7 @@ import { DateTimeSelection } from "@/components/schedule/DateTimeSelection";
 import { ReviewMeeting } from "@/components/schedule/ReviewMeeting";
 import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import { createGoogleCalendarUrl } from "@/lib/calendar";
 
 export default function SchedulePage() {
     const [step, setStep] = useState(1);
@@ -48,6 +49,14 @@ export default function SchedulePage() {
     const isStep3Valid = !!formData.date && !!formData.timeSlot;
 
     if (isSuccess) {
+        const calendarUrl = createGoogleCalendarUrl({
+            date: formData.date!,
+            timeSlot: formData.timeSlot!,
+            name: formData.name,
+            description: `Project discussion about ${formData.projectType}. More details: ${formData.description}`,
+            meetingType: formData.meetingType,
+        });
+
         return (
             <div className="pt-24 min-h-screen bg-losos-light flex items-center justify-center">
                 <div className="bg-white p-16 max-w-2xl text-center shadow-2xl border-t-8 border-losos-blue animate-in fade-in zoom-in duration-500">
@@ -62,7 +71,13 @@ export default function SchedulePage() {
                         <Button asChild>
                             <Link href="/">Return Home</Link>
                         </Button>
-                        <Button variant="outline">Add to Google Calendar</Button>
+                        {calendarUrl && (
+                            <Button variant="outline" asChild>
+                                <Link href={calendarUrl} target="_blank" rel="noopener noreferrer">
+                                    Add to Google Calendar
+                                </Link>
+                            </Button>
+                        )}
                     </div>
                 </div>
             </div>

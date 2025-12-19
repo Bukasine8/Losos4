@@ -41,7 +41,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-losos-blue/20 via-losos-dark to-losos-dark" />
                 </div>
 
-                <div className="container relative z-10 text-center px-4">
+                <header className="container relative z-10 text-center px-4">
                     <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 md:mb-8 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                         Precision Engineering <br className="hidden md:block" /> for Critical Infrastructure.
                     </h1>
@@ -57,7 +57,7 @@ export default function Home() {
                             <Link href="/projects">View Projects</Link>
                         </Button>
                     </div>
-                </div>
+                </header>
 
                 {/* Diagonal Cut Bottom */}
                 <div className="absolute bottom-0 left-0 right-0 h-16 md:h-24 bg-losos-light" style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%, 0 100%)" }}></div>
@@ -183,7 +183,7 @@ export default function Home() {
                         <div className="w-full h-full bg-losos-dark relative overflow-hidden rounded-sm">
                             <Image
                                 src="/images/quality_engineering_site.png"
-                                alt="Quality Engineering"
+                                alt="A team of engineers collaborating on a project in a modern office."
                                 fill
                                 className="object-cover opacity-80"
                             />
@@ -227,7 +227,7 @@ export default function Home() {
                             <div className="order-1 md:order-2 relative h-64 md:h-auto bg-gray-800 overflow-hidden">
                                 <Image
                                     src="/images/Project_Images/1X1250kVA and 385kVA Genset Installation at PPPRA HQ Building, Abuja.jpeg"
-                                    alt="Genset Installation"
+                                    alt="A large industrial generator set being installed at a government building."
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                                 />
@@ -249,7 +249,7 @@ export default function Home() {
                             <div className="order-1 md:order-2 relative h-64 md:h-auto bg-gray-800 overflow-hidden">
                                 <Image
                                     src="/images/Project_Images/Power and Distribution Installation at PPRA HQ Building, Abuja.jpeg"
-                                    alt="Power Distribution"
+                                    alt="Electrical engineers working on a power distribution panel in a large facility."
                                     fill
                                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                                 />
