@@ -185,6 +185,7 @@ export default function Home() {
                                 src="/images/quality_engineering_site.png"
                                 alt="A team of engineers collaborating on a project in a modern office."
                                 fill
+                                loading="lazy"
                                 className="object-cover opacity-80"
                             />
                             <div className="absolute inset-0 flex items-center justify-center">

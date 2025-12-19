@@ -33,6 +33,7 @@ export default function ProjectsPage() {
                                     src={`/images/Project_Images/${proj.src}`}
                                     alt={proj.title}
                                     fill
+                                    loading="lazy"
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-losos-blue/0 group-hover:bg-losos-blue/20 transition-colors duration-300" />
