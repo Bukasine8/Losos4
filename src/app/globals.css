@@ -35,7 +35,7 @@
   }
 
   /* Ensure minimum touch target size (48x48px recommended) */
-  @screen max-md {
+  @media (max-width: 767px) {
     button, [role="button"], a {
       min-height: 3rem;
       min-width: 3rem;
@@ -48,7 +48,7 @@
   }
 
   /* Main content spacing for mobile bottom nav */
-  @screen max-md {
+  @media (max-width: 767px) {
     main {
       padding-bottom: 5rem;
     }

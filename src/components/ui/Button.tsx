@@ -46,15 +46,23 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ({ className, variant, size, asChild = false, ...props }, ref) => {
-        const MotionComp = asChild ? motion(Slot) : motion.button;
+        const classes = cn(buttonVariants({ variant, size, className }));
 
+        // If asChild is requested (e.g., Link as child), don't pass framer-motion props
+        // to the child Slot since types and event signatures may differ.
+        if (asChild) {
+            const Comp = Slot as any;
+            return <Comp className={classes} ref={ref as any} {...props} />;
+        }
+
+        // Default: render a motion.button with motion props
         return (
-            <MotionComp
-                className={cn(buttonVariants({ variant, size, className }))}
+            <motion.button
+                className={classes}
                 ref={ref}
                 whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 300 } }}
                 whileTap={{ scale: 0.98, transition: { type: "spring", stiffness: 400 } }}
-                {...props}
+                {...(props as HTMLMotionProps<"button">)}
             />
         );
     }
