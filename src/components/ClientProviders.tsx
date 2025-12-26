@@ -1,17 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
-// Lazy load heavy interactive components client-side only
-const ContactFAB = dynamic(() => import("@/components/ui/ContactFAB").then(mod => ({ default: mod.ContactFAB })), {
-    ssr: false,
-    loading: () => null
-});
-
-const Chatbot = dynamic(() => import("@/components/ui/Chatbot").then(mod => ({ default: mod.Chatbot })), {
-    ssr: false,
-    loading: () => null
-});
+import { ContactFAB } from "@/components/ui/ContactFAB";
+import { Chatbot } from "@/components/ui/Chatbot";
 
 export function ClientProviders() {
     return (

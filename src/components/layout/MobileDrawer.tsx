@@ -9,15 +9,18 @@ import { X } from "lucide-react";
 import Image from "next/image";
 
 interface MobileDrawerProps {
+    // Controls visibility of the drawer
     isOpen: boolean;
+    // Callback to close drawer (used on backdrop click, Escape key, link click)
     onClose: () => void;
+    // List of navigation links to render
     navItems: { name: string; href: string }[];
 }
 
 export function MobileDrawer({ isOpen, onClose, navItems }: MobileDrawerProps) {
     const pathname = usePathname();
 
-    // Prevent scrolling when drawer is open
+    // Prevent body scrolling when drawer is open
     React.useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
@@ -27,7 +30,7 @@ export function MobileDrawer({ isOpen, onClose, navItems }: MobileDrawerProps) {
         return () => { document.body.style.overflow = "unset"; };
     }, [isOpen]);
 
-    // Close drawer on Escape key
+    // Close drawer when Escape key is pressed
     React.useEffect(() => {
         const handleEscape = (e: KeyboardEvent) => {
             if (e.key === "Escape" && isOpen) {
@@ -40,7 +43,7 @@ export function MobileDrawer({ isOpen, onClose, navItems }: MobileDrawerProps) {
 
     return (
         <>
-            {/* Backdrop */}
+            {/* Backdrop covers the screen when drawer is open */}
             <div
                 className={cn(
                     "fixed inset-0 bg-black/70 backdrop-blur-sm z-40 transition-opacity duration-300 ease-in-out md:hidden",
@@ -50,14 +53,14 @@ export function MobileDrawer({ isOpen, onClose, navItems }: MobileDrawerProps) {
                 aria-hidden="true"
             />
 
-            {/* Side Drawer */}
+            {/* Side Drawer panel slides in from the left */}
             <div
                 className={cn(
                     "fixed top-0 left-0 h-screen w-[85%] max-w-sm bg-gradient-to-b from-[#0F1428] to-[#070B1A] z-50 transform transition-transform duration-300 ease-out md:hidden flex flex-col shadow-2xl border-r border-white/5",
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >
-                {/* Header with Logo */}
+                {/* Header with brand logo */}
                 <div className="flex items-center px-5 py-5 border-b border-white/10 bg-[#070B1A]/80 flex-shrink-0">
                     <div className="relative w-11 h-11">
                         <Image
@@ -69,7 +72,7 @@ export function MobileDrawer({ isOpen, onClose, navItems }: MobileDrawerProps) {
                     </div>
                 </div>
 
-                {/* Scrollable Content Area */}
+                {/* Scrollable content area containing nav links and CTA */}
                 <div className="flex-1 overflow-y-auto">
                     {/* Navigation Links */}
                     <nav className="py-2 px-3 mt-2">
@@ -96,10 +99,10 @@ export function MobileDrawer({ isOpen, onClose, navItems }: MobileDrawerProps) {
                         </ul>
                     </nav>
 
-                    {/* Spacer to push CTA to bottom, unless content is long */}
+                    {/* Spacer to push CTA to bottom when content is short */}
                     <div className="flex-grow" />
 
-                    {/* CTA Section */}
+                    {/* CTA Section at the bottom */}
                     <div className="p-5 mt-4 border-t border-white/10 bg-[#070B1A]/90 space-y-3">
                         <p className="text-xs text-gray-400 uppercase tracking-wider font-semibold px-1">
                             Ready to get started?
@@ -110,13 +113,6 @@ export function MobileDrawer({ isOpen, onClose, navItems }: MobileDrawerProps) {
                     </div>
                 </div>
             </div>
-
-            {/* Drawer styles injection */}
-            <style jsx>{`
-                .touch-highlight {
-                    -webkit-tap-highlight-color: transparent;
-                }
-            `}</style>
         </>
     );
 }

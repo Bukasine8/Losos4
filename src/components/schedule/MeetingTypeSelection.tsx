@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/Card";
+import { Card } from "@/components/ui/std-card";
 import { cn } from "@/lib/utils";
 import { Building2, Video } from "lucide-react";
 
