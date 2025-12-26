@@ -1,4 +1,5 @@
 import { Section } from "@/components/ui/Section";
+import * as React from "react";
 import { Button } from "@/components/ui/Button";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import Link from "next/link";
@@ -277,7 +278,9 @@ export default function Home() {
                         <h2 className="text-3xl font-bold mb-4 text-losos-dark">What Our Clients Say</h2>
                         <p className="text-gray-600">Trusted by industry leaders.</p>
                     </div>
-                    <TestimonialsCarousel />
+                    <React.Suspense fallback={<div className="h-64 flex items-center justify-center text-gray-400">Loading testimonials...</div>}>
+                        <TestimonialsCarousel />
+                    </React.Suspense>
                 </div>
             </Section>
 
